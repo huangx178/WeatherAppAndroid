@@ -2,7 +2,7 @@ package website.huangx.weather
 
 import com.google.gson.Gson
 import org.junit.Test
-import website.huangx.weather.model.CityWeather
+import website.huangx.weather.networking.model.CityWeather
 
 class NetworkingTest {
     @Test

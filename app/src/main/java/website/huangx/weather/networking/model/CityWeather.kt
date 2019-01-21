@@ -1,4 +1,4 @@
-package website.huangx.weather.model
+package website.huangx.weather.networking.model
 
 class CityWeather{
     var name=""

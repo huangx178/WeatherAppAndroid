@@ -5,12 +5,19 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import kotlinx.android.synthetic.main.activity_main.*
 import website.huangx.weather.networking.CityWeatherRemoteDataSource
 import website.huangx.weather.networking.model.CityWeather
 
-class MainActivity : AppCompatActivity(), MainInterface.View, TextWatcher {
+class MainActivity :AppCompatActivity(),
+                    MainInterface.View,
+                    TextWatcher,
+                    RadioGroup.OnCheckedChangeListener{
     val TAG = "MAIN_ACTIVITY"
+
+    private val favoriteCities = arrayOf("Beijing", "Hong Kong", "Vancouver")
 
     private var cityWeather:CityWeather? = null
 
@@ -20,6 +27,10 @@ class MainActivity : AppCompatActivity(), MainInterface.View, TextWatcher {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         inputCityName.addTextChangedListener(this)
+        rgFavoriteCity.clearCheck()
+        rgFavoriteCity.setOnCheckedChangeListener(this)
+        for(i in 0..2)
+            (rgFavoriteCity.getChildAt(i) as? RadioButton)?.text = favoriteCities[i]
     }
 
     //MainInterface.View
@@ -54,7 +65,14 @@ class MainActivity : AppCompatActivity(), MainInterface.View, TextWatcher {
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        rgFavoriteCity.clearCheck()
         if(s != null)
             presenter.loadCityWeather(s!!.toString())
+    }
+
+    override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
+        val index = rgFavoriteCity.indexOfChild(rgFavoriteCity.findViewById(checkedId))
+        if(index in 0..2)
+            presenter.loadCityWeather(favoriteCities[index])
     }
 }

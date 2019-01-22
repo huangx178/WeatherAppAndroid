@@ -111,4 +111,60 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <RadioGroup
+        android:id="@+id/rgFavoriteCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal"
+        android:focusable="false">
+        <RadioButton
+            android:id="@+id/btnFavoriteCity1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:padding="5dp"
+            android:button="@null"
+            android:background="@drawable/button_select_state"
+            android:gravity="center"
+            android:textSize="20sp"/>
+
+        <RadioButton
+            android:id="@+id/btnFavoriteCity2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:padding="5dp"
+            android:button="@null"
+            android:background="@drawable/button_select_state"
+            android:gravity="center"
+            android:textSize="20sp"/>
+
+        <RadioButton
+            android:id="@+id/btnFavoriteCity3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:padding="5dp"
+            android:button="@null"
+            android:background="@drawable/button_select_state"
+            android:gravity="center"
+            android:textSize="20sp"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/favorite_city_title"
+        app:layout_constraintBottom_toTopOf="@+id/rgFavoriteCity"
+        app:layout_constraintEnd_toEndOf="@+id/rgFavoriteCity"
+        app:layout_constraintStart_toStartOf="@+id/rgFavoriteCity" />
 </android.support.constraint.ConstraintLayout>

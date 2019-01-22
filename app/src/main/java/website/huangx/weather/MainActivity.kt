@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import website.huangx.weather.networking.CityWeatherRemoteDataSource
 import website.huangx.weather.networking.model.CityWeather
@@ -55,6 +56,11 @@ class MainActivity :AppCompatActivity(),
         txtTemperature.text = if (temp!=null) "%.2f".format(temp!!) else ""
         txtHumidity.text = cityWeather.main?.humidity?.toString() ?: ""
         txtPressure.text = cityWeather.main?.pressure?.toString() ?: ""
+
+        if(cityWeather.weather?.get(0)?.icon != null)
+            Picasso.get()
+                    .load("http://openweathermap.org/img/w/${cityWeather.weather!![0]!!.icon!!}.png")
+                    .into(ivWeatherIcon)
     }
 
     override fun onLoadCityWeatherError(error: Throwable) {

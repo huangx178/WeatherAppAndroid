@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="input_hint">Enter City Name</string>
+    <string name="temperature_title">Temperature</string>
+    <string name="pressure_title">Pressure</string>
+    <string name="humidity_title">Humidity</string>
 </resources>

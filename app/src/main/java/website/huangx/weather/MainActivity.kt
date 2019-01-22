@@ -31,6 +31,10 @@ class MainActivity :AppCompatActivity(),
         rgFavoriteCity.setOnCheckedChangeListener(this)
         for(i in 0..2)
             (rgFavoriteCity.getChildAt(i) as? RadioButton)?.text = favoriteCities[i]
+        tbTempUnit.setOnClickListener{
+            if(this.cityWeather != null)
+                onLoadCityWeatherSuccess(cityWeather!!)
+        }
     }
 
     //MainInterface.View
@@ -46,7 +50,9 @@ class MainActivity :AppCompatActivity(),
         this.cityWeather = cityWeather
         txtCityName.text = cityWeather.name
         txtDiscription.text = cityWeather.weather?.get(0)?.description ?: ""
-        txtTemperature.text = cityWeather.main?.temp?.toString() ?: ""
+        val temp = if (tbTempUnit.isChecked) kelvinToCelsius(cityWeather.main?.temp)
+                    else kelvinToFahrenheit(cityWeather.main?.temp)
+        txtTemperature.text = if (temp!=null) "%.2f".format(temp!!) else ""
         txtHumidity.text = cityWeather.main?.humidity?.toString() ?: ""
         txtPressure.text = cityWeather.main?.pressure?.toString() ?: ""
     }
@@ -74,5 +80,18 @@ class MainActivity :AppCompatActivity(),
         val index = rgFavoriteCity.indexOfChild(rgFavoriteCity.findViewById(checkedId))
         if(index in 0..2)
             presenter.loadCityWeather(favoriteCities[index])
+    }
+
+    //helpers
+    private fun kelvinToFahrenheit(kelvin: Double?):Double?{
+        if(kelvin==null)
+            return null
+        return kelvinToCelsius(kelvin)!!*9/5+32
+    }
+
+    private fun kelvinToCelsius(kelvin:Double?):Double?{
+        if(kelvin == null)
+            return null
+        return kelvin!!-273.15
     }
 }
